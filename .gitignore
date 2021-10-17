@@ -28,5 +28,6 @@ Temporary Items
 #
 .ipynb_checkpoints
 easyquiz.egg-info/
+build/
 dist/
 *.pyc
