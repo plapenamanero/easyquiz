@@ -29,7 +29,7 @@ Jupyter notebooks are a great resource to create interactive documents to be use
 
 Using a virtual environment is encouraged. The package has been tested using both Conda and Python virtual environmets (virtualenv). 
 
-1. Install with [`pip3`](https://pypi.org/project/easyquiz/0.1/) using Pypi
+1. Install with [`pip3`](https://pypi.org/project/easyquiz/0.2/) using Pypi
     + `$ pip3 install easyquiz`
 
 2. Install with `pip3`
@@ -42,7 +42,7 @@ Using a virtual environment is encouraged. The package has been tested using bot
 
 When using Google Colab a virtual enrironment is not neccesary.
 
-1. Install with [`pip3`](https://pypi.org/project/easyquiz/0.1/) using Pypi
+1. Install with [`pip3`](https://pypi.org/project/easyquiz/0.2/) using Pypi
     + `$ pip3 install easyquiz`
 
 ## Usage
