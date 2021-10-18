@@ -4,12 +4,15 @@
 
 <h4 align="center">a multiple choice quiz creator for Jupyter notebooks</h4>
 
+<center>[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5574464.svg)](https://doi.org/10.5281/zenodo.5574464)</center>
+
 <p align="center">
   <a href="#Description">Description</a> -
   <a href="#Installation">Installation</a> - 
   <a href="#Usage"> Usage </a> -
   <a href="#Troubleshooting">Troubleshooting</a> -
-  <a href="#License">License </a>
+  <a href="#License">License </a> - 
+  <a href="#Cite">Cite </a>
 </p>
 
 
@@ -61,5 +64,11 @@ If options are does not appear on quiz.show(), please try this: (see [source](ht
 ## License
 
 MIT license
+
+## Cite
+
+easyquiz has DOI! If you use easyquiz on your project please cite it using it.
+
+<center>[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5574464.svg)](https://doi.org/10.5281/zenodo.5574464)</center>
 
 
