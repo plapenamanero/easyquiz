@@ -4,7 +4,9 @@
 
 <h4 align="center">a multiple choice quiz creator for Jupyter notebooks</h4>
 
-<center><a href="https://zenodo.org/badge/latestdoi/418080992"><img src="https://zenodo.org/badge/418080992.svg" alt="DOI"></a></center>
+<p align="center">
+<a href="https://zenodo.org/badge/latestdoi/418080992"><img src="https://zenodo.org/badge/418080992.svg" alt="DOI"></a>
+</p>
 
 <p align="center">
   <a href="#Description">Description</a> -
@@ -69,6 +71,8 @@ MIT license
 
 easyquiz has DOI! If you use easyquiz on your project please cite it using it.
 
-<center><a href="https://zenodo.org/badge/latestdoi/418080992"><img src="https://zenodo.org/badge/418080992.svg" alt="DOI"></a></center>
+<p align="center">
+<a href="https://zenodo.org/badge/latestdoi/418080992"><img src="https://zenodo.org/badge/418080992.svg" alt="DOI"></a>
+</p>
 
 
