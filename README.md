@@ -58,9 +58,9 @@ Please see the notebook examples for detailed usage instructions and examples.
 
 If options do not appear on quiz.show(), please try this: (see [source](https://stackoverflow.com/questions/36351109/ipython-notebook-ipywidgets-does-not-show))
 
-1. For non conda or virtualenv: con a command promet type:
+1. For non conda or virtualenv: on a command prompt type:
    `$ jupyter nbextension enable --py widgetsnbextension`
-2. For non conda or virtualenv: con a command promet type:
+2. For non conda or virtualenv: on a command prompt type:
    `$ jupyter nbextension enable --py --sys-prefix widgetsnbextension`
 
 ## License
