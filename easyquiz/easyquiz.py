@@ -10,12 +10,16 @@ Raises:
     with a type different from str
 """
 
-import ipywidgets as widgets
+import ipywidgets as w
 from ipywidgets import Layout
 from IPython.display import clear_output
+import hashlib
 import random
 import json
 import os
+import string
+
+from . import formative
 
 
 class QuizQuestion():
@@ -84,10 +88,10 @@ class QuizQuestion():
         """
         if options and self.check_options(options):
             self._options = options
-            self._alternatives = widgets.RadioButtons(options=options,
-                                description='',
-                                disabled=False,
-                                layout=widgets.Layout(width='100%'))
+            self._alternatives = w.RadioButtons(options=options,
+                                                description='',
+                                                disabled=False,
+                                                layout=w.Layout(width='100%'))
 
             self.options_status = 'OK'
         else:
@@ -193,27 +197,39 @@ class Quiz():
                                        statement=question['statement'],
                                        options=question['options'],
                                        solution=question['solution']))
+            try:
+                self.quiz_key = quiz_data['quiz_key']
+            except KeyError:
+                self.quiz_key = formative.get_random_string(20)
+
         else:
             self.language = lang
             self.title = title
             self.description = description
             self.questions = []
+            self.quiz_key = formative.get_random_string(20)
 
         this_dir, this_filename = os.path.split(__file__)
         LANGS_PATH = os.path.join(this_dir, "langs.json")
-        
+
         try:
             with open(LANGS_PATH, 'r') as f:
                 languages = json.load(f)
         except FileNotFoundError:
             print('Language file not found, defaults loaded.')
+
+            eng_wrong = 'Oops, looks like something went wrong.'
+            eng_wrong += ' Think it again!'
+            esp_wrong = 'Oops, parece que no lo has entendido bien.'
+            esp_wrong += ' ¡Vuelve a intentarlo!'
+
             languages = {'eng': {'button_text': 'Check',
                                  'correct_msg': 'Well done! Correct answer.',
-                                 'wrong_msg': 'Ooops, looks like something went wrong. Think it again!',
-                                'intro': 'Question'},
+                                 'wrong_msg': eng_wrong,
+                                 'intro': 'Question'},
                          'esp': {'button_text': 'Comprobar',
                                  'correct_msg': '¡Respuesta correcta!',
-                                 'wrong_msg': 'Ooops, parece que no lo has entendido bien. ¡Vuelve a intentarlo!',
+                                 'wrong_msg': esp_wrong,
                                  'intro': 'Pregunta'}}
 
         try:
@@ -225,16 +241,16 @@ class Quiz():
             raise KeyError('Language "{}" not supported'.format(self.language))
 
         b_margin = '20px 0px 20px 0px'
-        self.check = widgets.Button(description=button_text,
-                                    layout=Layout(margin=b_margin))
-        self.out = widgets.Output()
+        self.check = w.Button(description=button_text,
+                              layout=Layout(margin=b_margin))
+        self.out = w.Output()
         self.check.on_click(self.check_responses)
 
     def __str__(self):
-        return 'easyquiz Quiz ({} questions)'.format(len(self.questions))
+        return 'easyquiz Quiz ({})'.format(self.quiz_key)
 
     def __repr__(self):
-        return 'easyquiz.Quiz({})'.format(len(self.questions))
+        return 'easyquiz.Quiz({})'.format(self.quiz_key)
 
     def add_questions(self, questions):
         """ Adds a question to the Quiz
@@ -245,7 +261,7 @@ class Quiz():
         for question in questions:
             self.questions.append(question)
 
-    def show(self, rand=False):
+    def show(self, rand=False, id=None):
         """ Shows the quiz
 
         Args:
@@ -257,7 +273,10 @@ class Quiz():
             if self.description:
                 print('\n{}'.format(self.description))
 
+        self.id = id
+
         questions_show = self.questions.copy()
+
         if rand:
             random.shuffle(questions_show)
 
@@ -267,6 +286,10 @@ class Quiz():
             display(question._alternatives)
 
         display(self.check)
+
+        with self.out:
+            clear_output()
+
         display(self.out)
 
     def check_responses(self, button):
@@ -279,8 +302,20 @@ class Quiz():
         with self.out:
             clear_output()
 
+        are_correct = []
         for i, question in enumerate(self.questions):
+            are_correct.append(question.correct())
             self.create_feedback(i+1, question.correct())
+
+        if self.id and self.quiz_key:
+            if all(are_correct):
+                activity_key = formative.get_key(self.id, self.quiz_key)
+                msg = '¡Perfecto! Aquí tienes el código de la actividad:'
+                msg += ' {}'.format(activity_key)
+
+                with self.out:
+                    print()
+                    print(msg)
 
     def create_feedback(self, question_no, correct=False):
         """ Creates the feedback for a question and adds is in the output space
@@ -356,7 +391,8 @@ class Quiz():
         output_dict = {'title': self.title,
                        'description': self.description,
                        'language': self.language,
-                       'questions': questions}
+                       'questions': questions,
+                       'quiz_key': self.quiz_key}
 
         with open(path, "w") as f:
             json.dump(output_dict, f, indent=4)

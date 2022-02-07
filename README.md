@@ -47,7 +47,7 @@ Using a virtual environment is encouraged. The package has been tested using bot
 
 When using Google Colab a virtual enrironment is not neccesary.
 
-1. Install with [`pip3`](https://pypi.org/project/easyquiz/0.2/) using Pypi
+1. Install with [`pip3`](https://pypi.org/project/easyquiz/0.3/) using Pypi
     + `$ pip3 install easyquiz`
 
 ## Usage
