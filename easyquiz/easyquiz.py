@@ -309,7 +309,7 @@ class Quiz():
 
         if self.id and self.quiz_key:
             if all(are_correct):
-                activity_key = formative.get_key(self.id, self.quiz_key)
+                activity_key = formative.get_key(self.id, self)
                 msg = '¡Perfecto! Aquí tienes el código de la actividad:'
                 msg += ' {}'.format(activity_key)
 
