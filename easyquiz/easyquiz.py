@@ -223,20 +223,26 @@ class Quiz():
             esp_wrong = 'Oops, parece que no lo has entendido bien.'
             esp_wrong += ' ¡Vuelve a intentarlo!'
 
+            eng_final = 'Perfect! Here you have your activity code:'
+            esp_final = '¡Perfecto! Aquí tienes el código de la actividad:'
+
             languages = {'eng': {'button_text': 'Check',
                                  'correct_msg': 'Well done! Correct answer.',
                                  'wrong_msg': eng_wrong,
-                                 'intro': 'Question'},
+                                 'intro': 'Question',
+                                 'final_msg': eng_final},
                          'esp': {'button_text': 'Comprobar',
                                  'correct_msg': '¡Respuesta correcta!',
                                  'wrong_msg': esp_wrong,
-                                 'intro': 'Pregunta'}}
+                                 'intro': 'Pregunta',
+                                 'final_msg': esp_final}}
 
         try:
             button_text = languages[self.language]['button_text']
             self.correct_msg = languages[self.language]['correct_msg']
             self.wrong_msg = languages[self.language]['wrong_msg']
             self.intro = languages[self.language]['intro']
+            self.final_msg = languages[self.language]['final_msg']
         except KeyError:
             raise KeyError('Language "{}" not supported'.format(self.language))
 
@@ -258,6 +264,7 @@ class Quiz():
         Args:
             questions (easyquiz.QuizQueston): easyquiz Question objec
         """
+
         for question in questions:
             self.questions.append(question)
 
@@ -268,6 +275,7 @@ class Quiz():
             rand (bool, optional): Show the questions in randomly sorted.
             Defaults to False.
         """
+
         if self.title:
             print('\n\033[1m', '{}'.format(self.title), '\033[0m')
             if self.description:
@@ -299,6 +307,7 @@ class Quiz():
         Args:
             button (ipywidgets.Button): Quiz button
         """
+
         with self.out:
             clear_output()
 
@@ -310,7 +319,7 @@ class Quiz():
         if self.id and self.quiz_key:
             if all(are_correct):
                 activity_key = formative.get_key(self.id, self)
-                msg = '¡Perfecto! Aquí tienes el código de la actividad:'
+                msg = self.final_msg
                 msg += ' {}'.format(activity_key)
 
                 with self.out:
@@ -327,6 +336,7 @@ class Quiz():
             correct (bool, optional): Correctness of the answer.
             Defaults to False.
         """
+
         bcolors = {'start': '\033[95m',
                    'green': '\033[32m',
                    'red': '\033[31m',
@@ -354,6 +364,7 @@ class Quiz():
         Raises:
             TypeError: title type different to str
         """
+
         if isinstance(title, str):
             self.title = title
         elif title is None:
@@ -370,6 +381,7 @@ class Quiz():
         Raises:
             TypeError: description different to str
         """
+
         if type(description) == str:
             self.description = description
         elif description is None:
