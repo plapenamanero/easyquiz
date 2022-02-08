@@ -1,0 +1,28 @@
+{
+    "title": "Animal Quiz (easyquiz example)",
+    "description": "Answer the following questions",
+    "language": "eng",
+    "questions": [
+        {
+            "question_type": "multiple_choice",
+            "statement": "What kind of animal is a feline",
+            "options": [
+                "Dog",
+                "Elephant",
+                "Cat"
+            ],
+            "solution": "Cat"
+        },
+        {
+            "question_type": "multiple_choice",
+            "statement": "What kind of animal is a canine",
+            "options": [
+                "Dog",
+                "Elephant",
+                "Cat"
+            ],
+            "solution": "Dog"
+        }
+    ],
+    "quiz_key": "ODLasRnAnnealDSvmmas"
+}
