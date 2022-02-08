@@ -52,7 +52,7 @@ def get_key(id, quiz):
     return result.hexdigest()
 
 
-def check_key(id, key, key_comp):
+def check_key(id, quiz, key_comp):
     """ Checks if the provided key matches the true activity ID.
 
     Args:
@@ -64,7 +64,7 @@ def check_key(id, key, key_comp):
         bool: Returns True is keys match.
     """
 
-    key_check = hashlib.md5(mix_str(id, key).encode()).hexdigest()
+    key_check = hashlib.md5(mix_str(id, quiz.quiz_key).encode()).hexdigest()
     return key_comp == key_check
 
 
