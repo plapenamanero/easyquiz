@@ -3,12 +3,14 @@
         "button_text": "Check",
         "correct_msg": "Well done! Correct answer.",
         "wrong_msg": "Ooops, looks like something went wrong. Think it again!",
-        "intro": "Question"
+        "intro": "Question",
+        "final_msg": "Perfect! Here you have your activity code:"
     },
     "esp": {
         "button_text": "Comprobar",
         "correct_msg": "\u00a1Respuesta correcta!",
         "wrong_msg": "Ooops, parece que no lo has entendido bien. \u00a1Vuelve a intentarlo!",
-        "intro": "Pregunta"
+        "intro": "Pregunta",
+        "final_msg": "¡Perfecto! Aquí tienes el código de la actividad:"
     }
 }
